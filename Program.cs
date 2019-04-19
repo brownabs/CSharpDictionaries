@@ -250,6 +250,107 @@ namespace dictionaries
                 }
             }
 
+
+            /*
+                Create a dictionary with key value pairs to
+                represent words (key) and its definition (value)
+            */
+            Dictionary<string, string> wordsAndDefinitions = new Dictionary<string, string>();
+
+            // Add several more words and their definitions
+            wordsAndDefinitions.Add("Awesome", "The feeling of students when they are learning C#");
+            wordsAndDefinitions.Add("Scary", "The feeling that Abbey gets when learning C#");
+
+            /*
+                Use square bracket lookup to get the definition two
+                words and output them to the console
+            */
+            foreach (KeyValuePair<string, string> definition in wordsAndDefinitions)
+            {
+                Console.WriteLine(definition.Value);
+
+
+                /*
+                    Loop over dictionary to get the following output:
+                        The definition of [WORD] is [DEFINITION]
+                        The definition of [WORD] is [DEFINITION]
+                        The definition of [WORD] is [DEFINITION]
+                */
+                foreach (KeyValuePair<string, string> word in wordsAndDefinitions)
+                {
+
+                    Console.WriteLine($"The definition of {word.Key} is {word.Value}");
+
+                }
+
+                /* Now, you are going to refactor the structure of our data. Instead of one C# 
+                Dictionary with key value pairs for words and definitions. 
+                You want to track more than just the word and its definition, so we are going to build a list of dictionaries.
+                */
+
+                // Make a new list -- list of type Dictionary 
+                List<Dictionary<string, string>> dictionaryOfWords = new List<Dictionary<string, string>>();
+
+                /*
+                    You want to track the following about each word:
+                        word, definition, part of speech, example sentence
+
+                    Example of one dictionary in the list:
+                    {
+                        "word": "excited",
+                        "definition": "having, showing, or characterized by a heightened state of energy, enthusiasm, eagerness",
+                        "part of speech": "adjective",
+                        "example sentence": "I am excited to learn C#!"
+                    }
+                */
+
+                // Create dictionary to represent a new word
+                Dictionary<string, string> excitedWord = new Dictionary<string, string>() {
+                        {"word", "excited"},
+                        {"definition", "having, showing, or characterized by a heightened state of energy, enthusiasm, eagerness"},
+                        {"part of speech", "adjective"},
+                };
+
+                // Add each of the 4 bits of data about the word to the Dictionary
+                excitedWord.Add("example sentence", "I am excited to learn C#!");
+
+                // Add Dictionary to your `dictionaryOfWords` list
+
+                dictionaryOfWords.Add(excitedWord);
+
+
+                // create another Dictionary and add that to the list
+
+                 Dictionary<string, string> sadWord = new Dictionary<string, string>() {
+                        {"word", "sad"},
+                        {"definition", "me somedays at NSS"},
+                        {"part of speech", "adjective"},
+                        {"example sentence", "I am sad I am struggling with C#😪"}
+
+                };
+
+                /*
+                    Iterate your list of dictionaries and output the data
+
+                    Example output for one word in the list of dictionaries:
+                        word: excited
+                        definition: having, showing, or characterized by a heightened state of energy, enthusiasm, eagerness
+                        part of speech: adjective
+                        example sentence: I am excited to learn C#!
+                */
+
+                // Iterate the List of Dictionaries
+                foreach (Dictionary<string, string> words in dictionaryOfWords)
+                {
+                    // Iterate the KeyValuePairs of the Dictionary
+                    foreach (KeyValuePair<string, string> wordData in words )
+                    {
+                        Console.WriteLine($"{wordData.Key}: {wordData.Value}");
+                    }
+                }
+
+
+            }
         }
     }
 }
